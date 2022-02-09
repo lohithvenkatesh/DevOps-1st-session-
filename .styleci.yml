@@ -1,14 +1,37 @@
-php:
-  preset: laravel
-  version: 8
-  disabled:
-    - no_unused_imports
-  finder:
-    not-name:
-      - index.php
-      - server.php
-js:
-  finder:
-    not-name:
-      - webpack.mix.js
-css: true
+AWSTemplateFormatVersion: "2010-09-09"
+Metadata:
+    Generator: "former2"
+Description: ""
+Resources:
+    EC2Instance:
+        Type: "AWS::EC2::Instance"
+        Properties:
+            ImageId: "ami-001089eb624938d9f"
+            InstanceType: "t2.micro"
+            KeyName: "adprivate"
+            AvailabilityZone: !Sub "${AWS::Region}a"
+            Tenancy: "default"
+            SubnetId: "subnet-0e448f2fcf7b1c34d"
+            EbsOptimized: false
+            SecurityGroupIds: 
+              - "sg-0498088c7229adf9b"
+            SourceDestCheck: true
+            BlockDeviceMappings: 
+              - 
+                DeviceName: "/dev/xvda"
+                Ebs: 
+                    Encrypted: false
+                    VolumeSize: 8
+                    SnapshotId: "snap-01278cf30e4db9372"
+                    VolumeType: "gp2"
+                    DeleteOnTermination: true
+            UserData: "IyEvYmluL2Jhc2gKeXVtIGluc3RhbGwgaHR0cGQgLXkKc2VydmljZSBodHRwZCBzdGFydApjaGtjb25maWcgaHR0cGQgb24KZWNobyAqTVkgV0VCIFNFUlZFUi0xKj4vdmFyL3d3dy9odG1sL2luZGV4Lmh0bWw="
+            Tags: 
+              - 
+                Key: "Name"
+                Value: "App-Server-1"
+            HibernationOptions: 
+                Configured: false
+            EnclaveOptions: 
+                Enabled: false
+
